@@ -3,3 +3,4 @@ wheel==0.36.2
 flit
 toml
 setuptools-scm
+pytest-runner
