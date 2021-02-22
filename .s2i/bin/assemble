@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-/usr/libexec/s2i/assemble
+pip install -r /tmp/src/requirements.txt
 
 # Install pycurl for tornado to support self-signed certs - see https://github.com/jupyterhub/oauthenticator/pull/410
 pip install --compile --install-option="--with-nss" --no-cache-dir pycurl
