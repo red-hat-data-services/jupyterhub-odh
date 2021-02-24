@@ -1,6 +1,11 @@
 #!/bin/bash
 set -ex
 
+echo running the jupyter odh assemble
+echo /usr/libexec/s2i/assemble looks like this
+
+more /usr/libexec/s2i/assemble
+
 /usr/libexec/s2i/assemble
 
 # Install pycurl for tornado to support self-signed certs - see https://github.com/jupyterhub/oauthenticator/pull/410
