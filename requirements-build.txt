@@ -211,6 +211,10 @@ wheel==0.36.2 \
     # via -r requirements-build.in
 
 # The following packages are considered to be unsafe in a requirements file:
+pip==19.3.1 \
+    --hash=sha256:21207d76c1031e517668898a6b46a9fb1501c7a4710ef5dfd6a40ad9e6757ea7 \
+    --hash=sha256:6917c65fc3769ecdc61405d3dfd97afdedd75808d200b2838d7d961cebc0c2c7
+    # via -r requirements-build.in
 setuptools==52.0.0 \
     --hash=sha256:0a6f1f18249f78cffdad842efadf1ed7b039fa3355d93f3890f56bd66a48cf27 \
     --hash=sha256:fb3a1ee622509550dbf1d419f241296169d7f09cb1eb5b1736f2f10965932b96
