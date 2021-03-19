@@ -263,7 +263,7 @@ c.KubeSpawner.pvc_name_template = '%s-nb-{username}-pvc' % os.environ['JUPYTERHU
 c.KubeSpawner.volumes = [dict(name='data', persistentVolumeClaim=dict(claimName=c.KubeSpawner.pvc_name_template))]
 c.KubeSpawner.volume_mounts = [dict(name='data', mountPath=DEFAULT_MOUNT_PATH)]
 c.KubeSpawner.user_storage_class = os.environ.get("JUPYTERHUB_STORAGE_CLASS", c.KubeSpawner.user_storage_class)
+c.KubeSpawner.environment = { 'JUPYTER_ENABLE_LAB': 'true' }
 admin_users = os.environ.get('JUPYTERHUB_ADMIN_USERS')
 if admin_users:
-    c.Authenticator.admin_users = set(admin_users.split(','))
-    
+    c.Authenticator.admin_users = set(admin_users.split(',')
