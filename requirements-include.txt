@@ -1,5 +1,0 @@
-# we need this gathered, but not installed because the assemble
-# will compile it with special flags
-pycurl==7.43.0.6 \
-    --hash=sha256:8301518689daefa53726b59ded6b48f33751c383cf987b0ccfbbc4ed40281325
-    # via -r requirements.in

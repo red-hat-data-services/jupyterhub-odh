@@ -345,6 +345,9 @@ pycparser==2.20 \
     --hash=sha256:2d475327684562c3a96cc71adf7dc8c4f0565175cf86b6d7a404ff4c771f15f0 \
     --hash=sha256:7582ad22678f0fcd81102833f60ef8d0e57288b6b5fb00323d101be910e35705
     # via cffi
+pycurl==7.43.0.6 \
+    --hash=sha256:8301518689daefa53726b59ded6b48f33751c383cf987b0ccfbbc4ed40281325
+    # via -r requirements.in
 pydantic==1.8.1 \
     --hash=sha256:0c40162796fc8d0aa744875b60e4dc36834db9f2a25dbf9ba9664b1915a23850 \
     --hash=sha256:20d42f1be7c7acc352b3d09b0cf505a9fab9deb93125061b376fbe1f06a5459f \
