@@ -3,20 +3,17 @@ set -ex
 
 /usr/libexec/s2i/assemble
 
+# For ubi8 builds, this doesn't need to happen because libcurl is built with openssl
 # Install pycurl for tornado to support self-signed certs - see https://github.com/jupyterhub/oauthenticator/pull/410
-pip install --compile --install-option="--with-nss" --no-cache-dir pycurl
+# pip install --compile --install-option="--with-nss" --no-cache-dir pycurl
 
 JSP_UI_PKG_PATH=/opt/app-root/lib/python3.8/site-packages/jupyterhub_singleuser_profiles/ui
-JSP_UI_SRC_PATH=/opt/app-root/src/jupyterhub-singleuser-profiles/jupyterhub_singleuser_profiles/ui
+JSP_UI_SRC_PATH=/opt/app-root/src/jupyterhub-singleuser-profiles/jupyterhub_singleuser_profiles/ui/
 
 if [[ -d "${JSP_UI_PKG_PATH}" ]]; then
     JSP_UI_SRC_PATH=${JSP_UI_PKG_PATH}
 fi
 
-# Make sure that npm can find necessary config and cert files
-if [[ -f .npmrc ]]; then
-  cp .npmrc *.pem ${JSP_UI_SRC_PATH}
-fi
 cd ${JSP_UI_SRC_PATH}
 
 npm install
