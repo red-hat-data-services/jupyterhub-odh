@@ -1,5 +1,6 @@
 git+https://github.com/opendatahub-io/oauthenticator@9be428a7d101f0bd09c325ddd124f0be7c67f031#egg=oauthenticator
 git+https://github.com/vpavlin/jupyter-publish-extension@7cbf34e494fd9a0a79e9cd9a8c1d48a6775b9f49#egg=publish-service
+
 # It is critical that if this dependency is changed, the following files need to be copied from the designated version of jupyterhub-singleuser-profiles
 # to the jsp-npm-deps subdirectory AND VICE VERSA! This is to support Cachito builds where the final dep list at build time must be known pre-build
 #
