@@ -7,4 +7,4 @@ git+https://github.com/vpavlin/jupyter-publish-extension@7cbf34e494fd9a0a79e9cd9
 # jupyterhub-singleuser-profiles/jupyterhub_singleuser_profiles/ui/package.json
 # jupyterhub-singleuser-profiles/jupyterhub_singleuser_profiles/ui/package-lock.json
 #
-git+https://github.com/red-hat-data-services/jupyterhub-singleuser-profiles@b405bcfa7542fabd78e7a264a0facb86b1e2f1c7#egg=jupyterhub-singleuser-profiles
+git+https://github.com/red-hat-data-services/jupyterhub-singleuser-profiles@df969a2b3241b4af4e5bdf9ef530ca3d2a51c20f#egg=jupyterhub-singleuser-profiles
