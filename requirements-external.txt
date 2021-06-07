@@ -1,4 +1,4 @@
-git+https://github.com/opendatahub-io/oauthenticator@9be428a7d101f0bd09c325ddd124f0be7c67f031#egg=oauthenticator
+git+https://github.com/opendatahub-io/oauthenticator@d98936da37569b7bb400c6854b07041dce3e7f87#egg=oauthenticator
 
 # It is critical that if this dependency is changed, the following files need to be copied from the designated version of jupyterhub-singleuser-profiles
 # to the jsp-npm-deps subdirectory AND VICE VERSA! This is to support Cachito builds where the final dep list at build time must be known pre-build
@@ -6,4 +6,4 @@ git+https://github.com/opendatahub-io/oauthenticator@9be428a7d101f0bd09c325ddd12
 # jupyterhub-singleuser-profiles/jupyterhub_singleuser_profiles/ui/package.json
 # jupyterhub-singleuser-profiles/jupyterhub_singleuser_profiles/ui/package-lock.json
 #
-git+https://github.com/red-hat-data-services/jupyterhub-singleuser-profiles@b405bcfa7542fabd78e7a264a0facb86b1e2f1c7#egg=jupyterhub-singleuser-profiles
+git+https://github.com/red-hat-data-services/jupyterhub-singleuser-profiles@711a5410aea866684db9ad19474289b72c60db04#egg=jupyterhub-singleuser-profiles
