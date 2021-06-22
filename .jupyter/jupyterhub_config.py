@@ -167,7 +167,7 @@ class OpenShiftSpawner(KubeSpawner):
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
     self.single_user_services = []
-    self.single_user_profiles = SingleuserProfiles(gpu_mode=os.environ.get('GPU_MODE'), verify_ssl=verify_ssl)
+    self.single_user_profiles = SingleuserProfiles(namespace=NOTEBOOK_NAMESPACE, gpu_mode=os.environ.get('GPU_MODE'), verify_ssl=verify_ssl)
     self.gpu_mode = self.single_user_profiles.gpu_mode
     self.gpu_count = 0
     self.deployment_size = None
