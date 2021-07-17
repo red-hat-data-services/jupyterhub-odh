@@ -35,6 +35,57 @@ if "PROMETHEUS_API_TOKEN" in os.environ:
 
 DEFAULT_MOUNT_PATH = '/opt/app-root/src'
 
+custom_notebook_namespace = os.environ.get('NOTEBOOK_NAMESPACE')
+
+c.KubeSpawner.singleuser_extra_containers = [
+        {
+            "name": "nbviewer",
+            "image": "nbviewer:latest",
+            "ports": [
+                {
+                    "containerPort": 9090,
+                    "protocol": "TCP"
+                }
+            ],
+            "env" : [
+                {
+                    "name": "NBVIEWER_LOCALFILES",
+                    "value": "/opt/app-root/src/public_notebooks"
+                },
+                {
+                    "name": "NBVIEWER_TEMPLATES",
+                    "value": "/opt/app-root/src"
+                },
+                {
+                    "name": "NBVIEWER_PORT",
+                    "value": "9090"
+                },
+                {
+                    "name": "JUPYTERHUB_SERVICE_PREFIX",
+                    "value": "/user/{username}/public/"
+                },
+                {
+                    "name": "CACHE_EXPIRY_MIN",
+                    "value": "30"
+                },
+                {
+                    "name": "CACHE_EXPIRY_MAX",
+                    "value": "60"
+                },
+                {
+                    "name": "NO_CACHE",
+                    "value": "true"
+                }
+            ],
+        "volumeMounts": [
+            {
+                "mountPath": DEFAULT_MOUNT_PATH,
+                "name": "data"
+            }
+        ]
+        }
+    ]
+
 
 # Work out the public server address for the OpenShift REST API. Don't
 # know how to get this via the REST API client so do a raw request to
@@ -171,6 +222,8 @@ class OpenShiftSpawner(KubeSpawner):
     self.gpu_mode = self.single_user_profiles.gpu_mode
     self.gpu_count = 0
     self.deployment_size = None
+    self.uid = None
+    self.fs_gid = None
 
   def _options_form_default(self):
     response = html_string
@@ -179,7 +232,10 @@ class OpenShiftSpawner(KubeSpawner):
   def options_from_form(self, formdata):
     options = {}
     cm_data = self.single_user_profiles.user.get(self.user.name)
-    options['custom_image'] = cm_data['last_selected_image']
+    if custom_notebook_namespace:
+        options['custom_image'] = f'image-registry.openshift-image-registry.svc:5000/{namespace}/%s' % cm_data['last_selected_image']
+    else:
+        options['custom_image'] = cm_data['last_selected_image']
     options['size'] = cm_data['last_selected_size']
     self.gpu_count = cm_data['gpu']
     self.image = options['custom_image']
@@ -210,6 +266,10 @@ c.OpenShiftSpawner.modify_pod_hook = apply_pod_profile
 c.OpenShiftSpawner.cpu_limit = float(os.environ.get("SINGLEUSER_CPU_LIMIT", "1"))
 c.OpenShiftSpawner.mem_limit = os.environ.get("SINGLEUSER_MEM_LIMIT", "1G")
 c.OpenShiftSpawner.storage_pvc_ensure = True
+
+if custom_notebook_namespace:
+    c.KubeSpawner.namespace = custom_notebook_namespace
+
 c.KubeSpawner.storage_capacity = os.environ.get('SINGLEUSER_PVC_SIZE', '2Gi')
 c.KubeSpawner.pvc_name_template = '%s-nb-{username}-pvc' % os.environ['JUPYTERHUB_SERVICE_NAME']
 c.KubeSpawner.volumes = [dict(name='data', persistentVolumeClaim=dict(claimName=c.KubeSpawner.pvc_name_template))]
