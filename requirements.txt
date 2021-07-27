@@ -278,6 +278,10 @@ jupyter-telemetry==0.1.0 \
     --hash=sha256:1de3e423b23aa40ca4a4238d65c56dda544061ff5aedc3f7647220ed7e3b9589 \
     --hash=sha256:445c613ae3df70d255fe3de202f936bba8b77b4055c43207edf22468ac875314
     # via jupyterhub
+jupyterhub-idle-culler==1.1 \
+    --hash=sha256:45bceffeea8758b60e1f60650bc3de0d0d1e5f774623793db268ded1fa0cbdcb \
+    --hash=sha256:600b2713f90ecc475f690747d1ec02bcae8f44fa7f3e51a71e400727895631d8
+    # via -r requirements.in
 jupyterhub==1.4.2 \
     --hash=sha256:d22c516d0cc110f70a4256e199c6bfc06848f6fc9dde730674b6db2c95b43996 \
     --hash=sha256:d72908b3063fed1d35a3aa793c4a7ded2c8c4016b38e0135b33af0be49a8fc21
@@ -494,6 +498,7 @@ python-dateutil==2.8.2 \
     # via
     #   alembic
     #   jupyterhub
+    #   jupyterhub-idle-culler
     #   kubernetes
 python-editor==1.0.4 \
     --hash=sha256:1bf6e860a8ad52a14c3ee1252d5dc25b2030618ed80c022598f00176adc8367d \
@@ -686,7 +691,9 @@ tornado==6.1 \
     --hash=sha256:f0ba29bafd8e7e22920567ce0d232c26d4d47c8b5cf4ed7b562b5db39fa199c5 \
     --hash=sha256:fa2ba70284fa42c2a5ecb35e322e68823288a4251f9ba9cc77be04ae15eada68 \
     --hash=sha256:fba85b6cd9c39be262fcd23865652920832b61583de2a2ca907dbd8e8a8c81e5
-    # via jupyterhub
+    # via
+    #   jupyterhub
+    #   jupyterhub-idle-culler
 traitlets==5.0.5 \
     --hash=sha256:178f4ce988f69189f7e523337a3e11d91c786ded9360174a3d9ca83e79bc5396 \
     --hash=sha256:69ff3f9d5351f31a7ad80443c2674b7099df13cc41fc5fa6e2f6d3b0330b0426
