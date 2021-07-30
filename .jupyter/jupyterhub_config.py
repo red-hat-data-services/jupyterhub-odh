@@ -12,9 +12,7 @@ import requests
 # Do not shut down singleuser servers on restart
 c.JupyterHub.cleanup_servers = False
 
-
 import uuid
-c.ConfigurableHTTPProxy.auth_token = str(uuid.uuid4())
 jsp_api_dict = {
     'KUBERNETES_SERVICE_HOST': os.environ['KUBERNETES_SERVICE_HOST'],
     'KUBERNETES_SERVICE_PORT': os.environ['KUBERNETES_SERVICE_PORT'],
@@ -23,7 +21,7 @@ jsp_api_dict = {
 c.JupyterHub.services = [
                             {
                                 'name': 'jsp-api',
-                                'url': 'http://127.0.0.1:8181',
+                                'url': 'http://jupyterhub:8181',
                                 'admin': True,
                                 'command': ['jupyterhub-singleuser-profiles-api'],
                                 'environment': jsp_api_dict
@@ -235,4 +233,20 @@ c.KubeSpawner.user_storage_class = os.environ.get("JUPYTERHUB_STORAGE_CLASS", c.
 admin_users = os.environ.get('JUPYTERHUB_ADMIN_USERS')
 if admin_users:
     c.Authenticator.admin_users = set(admin_users.split(','))
-    
+
+
+#Enable Traefik Proxy instead of the configurableHTTPPRoxy
+from jupyterhub_traefik_proxy import TraefikTomlConfigmapProxy
+
+c.JupyterHub.proxy_class = TraefikTomlConfigmapProxy
+
+c.TraefikTomlConfigmapProxy.traefik_api_url = "http://traefik-proxy:8099"
+
+# traefik api endpoint login username
+c.TraefikTomlConfigmapProxy.traefik_api_username = os.environ['TRAEFIK_API_USERNAME']
+# traefik api endpoint login password
+c.TraefikTomlConfigmapProxy.traefik_api_password = os.environ['TRAEFIK_API_PASSWORD']
+
+c.TraefikTomlConfigmapProxy.cm_namespace = os.environ['NAMESPACE']
+c.TraefikTomlConfigmapProxy.cm_name = "traefik-rules"
+c.TraefikTomlConfigmapProxy.traefik_svc_namespace = os.environ['NAMESPACE']
