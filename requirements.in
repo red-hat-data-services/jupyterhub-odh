@@ -1,3 +1,12 @@
+aiohttp
+escapism
+jupyterhub>=1.2
+passlib
+toml
+kubernetes
+jsonpath-rw
+connexion[swagger-ui]
+connexion
 openshift==0.11.2
 cryptography==3.3.1
 psycopg2==2.8.6
