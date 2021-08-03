@@ -18,6 +18,27 @@ jsp_api_dict = {
     'KUBERNETES_SERVICE_PORT': os.environ['KUBERNETES_SERVICE_PORT'],
     'JUPYTERHUB_LOGIN_URL': None
 }
+
+from jupyterhub_singleuser_profiles.openshift import OpenShift
+
+openshift = OpenShift(namespace=namespace)
+culler_secret = 'jupyterhub-idle-culler'
+
+def get_culler_secret():
+
+    secret = openshift.read_secret(culler_secret)
+    if secret == {}:
+        return set_culler_secret()
+    else:
+        return secret['token']
+
+def set_culler_secret():
+
+    secret_data = str(uuid.uuid4())
+    openshift.write_secret(culler_secret, {'token': secret_data})
+    return secret_data
+
+idle_culler_api_token = get_culler_secret()
 c.JupyterHub.services = [
                             {
                                 'name': 'jsp-api',
@@ -25,7 +46,12 @@ c.JupyterHub.services = [
                                 'admin': True,
                                 'command': ['jupyterhub-singleuser-profiles-api'],
                                 'environment': jsp_api_dict
-                            }
+                            },
+                            {
+                                'name': 'idle-culler', 
+                                'api_token': idle_culler_api_token,
+                                'admin': True
+                            },
                         ]
 
 if "PROMETHEUS_API_TOKEN" in os.environ:

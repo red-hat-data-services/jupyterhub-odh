@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "0c6bfb112499ee2aed7c29762958705e1acbe05df4342bf77d0aa7cef019cf45"
+            "sha256": "ddee01e024a76495800463bcc335f108f576b9e59d42270f0f1f1199a571463b"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -173,11 +173,11 @@
         },
         "charset-normalizer": {
             "hashes": [
-                "sha256:88fce3fa5b1a84fdcb3f603d889f723d1dd89b26059d0123ca435570e848d5e1",
-                "sha256:c46c3ace2d744cfbdebceaa3c19ae691f53ae621b39fd7570f59d14fb7f2fd12"
+                "sha256:0c8911edd15d19223366a194a513099a302055a962bca2cec0f54b8b63175d8b",
+                "sha256:f23667ebe1084be45f6ae0538e4a5a865206544097e4e8bbcacf42cd02a348f3"
             ],
             "markers": "python_version >= '3'",
-            "version": "==2.0.3"
+            "version": "==2.0.4"
         },
         "click": {
             "hashes": [
@@ -339,11 +339,11 @@
         },
         "importlib-metadata": {
             "hashes": [
-                "sha256:079ada16b7fc30dfbb5d13399a5113110dab1aa7c2bc62f66af75f0b717c8cac",
-                "sha256:9f55f560e116f8643ecf2922d9cd3e1c7e8d52e683178fecd9d08f6aa357e11e"
+                "sha256:0645585859e9a6689c523927a5032f2ba5919f1f7d0e84bd4533312320de1ff9",
+                "sha256:51c6635429c77cf1ae634c997ff9e53ca3438b495f10a55ba28594dd69764a8b"
             ],
             "markers": "python_version < '3.8' and python_version < '3.8'",
-            "version": "==4.6.1"
+            "version": "==4.6.3"
         },
         "inflection": {
             "hashes": [
@@ -411,6 +411,14 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==1.4.2"
+        },
+        "jupyterhub-idle-culler": {
+            "hashes": [
+                "sha256:45bceffeea8758b60e1f60650bc3de0d0d1e5f774623793db268ded1fa0cbdcb",
+                "sha256:600b2713f90ecc475f690747d1ec02bcae8f44fa7f3e51a71e400727895631d8"
+            ],
+            "index": "pypi",
+            "version": "==1.1"
         },
         "jupyterhub-singleuser-profiles": {
             "hashes": [
@@ -718,10 +726,11 @@
         },
         "python-json-logger": {
             "hashes": [
-                "sha256:f26eea7898db40609563bed0a7ca11af12e2a79858632706d835a0f961b7d398"
+                "sha256:202a4f29901a4b8002a6d1b958407eeb2dd1d83c18b18b816f5b64476dde9096",
+                "sha256:99310d148f054e858cd5f4258794ed6777e7ad2c3fd7e1c1b527f1cba4d08420"
             ],
-            "markers": "python_version >= '3.4'",
-            "version": "==2.0.1"
+            "markers": "python_version >= '3.5'",
+            "version": "==2.0.2"
         },
         "python-string-utils": {
             "hashes": [
