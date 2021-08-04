@@ -2,10 +2,7 @@ c.KubeSpawner.http_timeout = 60 * 10 #Images are big, take time to pull, make it
 c.KubeSpawner.start_timeout = 60 * 10 #Images are big, take time to pull, make it 10 mins for now because of storage issue
 
 import os
-import sys
-
-import json
-import requests
+import distutils
 
 #c.JupyterHub.log_level = 'DEBUG'
 #c.Spawner.debug = True
@@ -101,11 +98,12 @@ with open(os.path.join(service_account_path, 'token')) as fp:
 
 c.OpenShiftOAuthenticator.client_secret = client_secret
 
-allowed_groups = os.environ.get('JUPYTERHUB_ALLOWED_GROUPS')
-admin_groups = os.environ.get('JUPYTERHUB_ADMIN_GROUPS')
-if allowed_groups:
+groups_default_denied = bool(distutils.util.strtobool(os.environ.get('JUPYTERHUB_GROUPS_DEFAULT_DENIED', "false")))
+allowed_groups = os.environ.get('JUPYTERHUB_ALLOWED_GROUPS', "")
+admin_groups = os.environ.get('JUPYTERHUB_ADMIN_GROUPS', "")
+if allowed_groups or groups_default_denied:
     c.OpenShiftOAuthenticator.allowed_groups = set(allowed_groups.split(','))
-if admin_groups:
+if admin_groups or groups_default_denied:
     c.OpenShiftOAuthenticator.admin_groups = set(admin_groups.split(','))
 
 # Work out hostname for the exposed route of the JupyterHub server. This
