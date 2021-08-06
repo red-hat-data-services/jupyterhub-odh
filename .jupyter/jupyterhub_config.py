@@ -12,11 +12,14 @@ import requests
 # Do not shut down singleuser servers on restart
 c.JupyterHub.cleanup_servers = False
 
+custom_notebook_namespace = os.environ.get('NOTEBOOK_NAMESPACE')
+
 import uuid
 jsp_api_dict = {
     'KUBERNETES_SERVICE_HOST': os.environ['KUBERNETES_SERVICE_HOST'],
     'KUBERNETES_SERVICE_PORT': os.environ['KUBERNETES_SERVICE_PORT'],
-    'JUPYTERHUB_LOGIN_URL': None
+    'JUPYTERHUB_LOGIN_URL': None,
+    'NOTEBOOK_NAMESPACE': custom_notebook_namespace
 }
 
 from jupyterhub_singleuser_profiles.openshift import OpenShift
@@ -58,8 +61,6 @@ if "PROMETHEUS_API_TOKEN" in os.environ:
     c.JupyterHub.services.append(dict(name='prometheus', api_token=os.environ.get("PROMETHEUS_API_TOKEN")))
 
 DEFAULT_MOUNT_PATH = '/opt/app-root/src'
-
-custom_notebook_namespace = os.environ.get('NOTEBOOK_NAMESPACE')
 
 # Work out the public server address for the OpenShift REST API. Don't
 # know how to get this via the REST API client so do a raw request to
@@ -192,7 +193,7 @@ class OpenShiftSpawner(KubeSpawner):
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
     self.single_user_services = []
-    self.single_user_profiles = SingleuserProfiles(gpu_mode=os.environ.get('GPU_MODE'), verify_ssl=verify_ssl)
+    self.single_user_profiles = SingleuserProfiles(gpu_mode=os.environ.get('GPU_MODE'), notebook_namespace=custom_notebook_namespace, verify_ssl=verify_ssl)
     self.gpu_mode = self.single_user_profiles.gpu_mode
     self.gpu_count = 0
     self.deployment_size = None
