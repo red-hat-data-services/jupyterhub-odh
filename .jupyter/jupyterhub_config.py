@@ -3,6 +3,7 @@ c.KubeSpawner.start_timeout = 60 * 10 #Images are big, take time to pull, make i
 
 import os
 import distutils
+from distutils import util
 
 #c.JupyterHub.log_level = 'DEBUG'
 #c.Spawner.debug = True
