@@ -99,13 +99,19 @@ with open(os.path.join(service_account_path, 'token')) as fp:
 
 c.OpenShiftOAuthenticator.client_secret = client_secret
 
+def parse_groups(groups_str):
+    group_set = set()
+    for group in groups_str.split(','):
+        group_set.add(group.strip())
+    return group_set
+
 groups_default_denied = bool(distutils.util.strtobool(os.environ.get('JUPYTERHUB_GROUPS_DEFAULT_DENIED', "false")))
 allowed_groups = os.environ.get('JUPYTERHUB_ALLOWED_GROUPS', "")
 admin_groups = os.environ.get('JUPYTERHUB_ADMIN_GROUPS', "")
 if allowed_groups or groups_default_denied:
-    c.OpenShiftOAuthenticator.allowed_groups = set(allowed_groups.split(','))
+    c.OpenShiftOAuthenticator.allowed_groups = parse_groups(allowed_groups)
 if admin_groups or groups_default_denied:
-    c.OpenShiftOAuthenticator.admin_groups = set(admin_groups.split(','))
+    c.OpenShiftOAuthenticator.admin_groups = parse_groups(admin_groups)
 
 # Work out hostname for the exposed route of the JupyterHub server. This
 # is tricky as we need to use the REST API to query it.
