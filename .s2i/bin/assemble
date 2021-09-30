@@ -16,7 +16,7 @@ fi
 
 cd ${JSP_UI_SRC_PATH}
 
-npm install
+npm install --only=prod
 npm run build
 
 cd /opt/app-root/share/jupyterhub/static/
