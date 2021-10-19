@@ -192,6 +192,7 @@ for tag in parser.html_tag:
     html_string = html_string[:tag] + html_string[tag:]
 
 from jupyterhub_singleuser_profiles.profiles import SingleuserProfiles
+from jupyterhub_singleuser_profiles.utils import escape
 
 from kubespawner import KubeSpawner
 class OpenShiftSpawner(KubeSpawner):
@@ -231,6 +232,20 @@ class OpenShiftSpawner(KubeSpawner):
       env['JUPYTERHUB_ACTIVITY_URL'] = f'http://{service_name}.{namespace}:8081/hub/api/users/{self.user.name}/activity'
 
     return env
+
+  async def get_url(self):
+    pods = oapi_client.resources.get(kind='Pod', api_version='v1')
+    pod = pods.get(name="jupyterhub-nb-%s" % escape(self.user.name), namespace=custom_notebook_namespace if custom_notebook_namespace else namespace)
+
+    url = None
+    try:
+        url = "http://%s:%d/user/%s/" % (pod["status"]["podIP"], pod['spec']['containers'][0]['ports'][0]['containerPort'], self.user.name)
+    except Exception as e:
+        self.log.error("Failed to produce pod url")
+        raise
+
+    return url
+
 
 def apply_pod_profile(spawner, pod):
   spawner.single_user_profiles.load_profiles(username=spawner.user.name)
