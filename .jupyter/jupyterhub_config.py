@@ -246,6 +246,8 @@ class OpenShiftSpawner(KubeSpawner):
 
     return url
 
+  def get_image(self):
+    return self.single_user_profiles.user.get(self.user.name)['last_selected_image']
 
 def apply_pod_profile(spawner, pod):
   spawner.single_user_profiles.load_profiles(username=spawner.user.name)
@@ -254,6 +256,7 @@ def apply_pod_profile(spawner, pod):
   return SingleuserProfiles.apply_pod_profile(spawner.user.name, pod, profile, gpu_types, DEFAULT_MOUNT_PATH, spawner.gpu_mode)
 
 def setup_environment(spawner):
+    spawner.image = spawner.get_image()
     spawner.single_user_profiles.load_profiles(username=spawner.user.name)
     spawner.single_user_profiles.setup_services(spawner, spawner.image, spawner.user.name)
 
