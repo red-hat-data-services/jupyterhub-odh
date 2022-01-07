@@ -213,13 +213,8 @@ class OpenShiftSpawner(KubeSpawner):
   def options_from_form(self, formdata):
     options = {}
     cm_data = self.single_user_profiles.user.get(self.user.name)
-    if custom_notebook_namespace:
-        options['custom_image'] = f'image-registry.openshift-image-registry.svc:5000/{namespace}/%s' % cm_data['last_selected_image']
-    else:
-        options['custom_image'] = cm_data['last_selected_image']
     options['size'] = cm_data['last_selected_size']
     self.gpu_count = cm_data['gpu']
-    self.image = options['custom_image']
     self.deployment_size = cm_data['last_selected_size']
 
     return options
@@ -247,7 +242,12 @@ class OpenShiftSpawner(KubeSpawner):
     return url
 
   def get_image(self):
-    return self.single_user_profiles.user.get(self.user.name)['last_selected_image']
+    image = self.single_user_profiles.user.get(self.user.name)['last_selected_image']
+    if custom_notebook_namespace:
+        return f'image-registry.openshift-image-registry.svc:5000/{namespace}/%s' % image
+    else:
+        return image
+    
 
 def apply_pod_profile(spawner, pod):
   spawner.single_user_profiles.load_profiles(username=spawner.user.name)
