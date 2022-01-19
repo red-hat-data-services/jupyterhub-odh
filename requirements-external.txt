@@ -6,5 +6,5 @@ git+https://github.com/opendatahub-io/oauthenticator@42c4790a2db77ff4259a74e15ed
 # jupyterhub-singleuser-profiles/jupyterhub_singleuser_profiles/ui/package.json
 # jupyterhub-singleuser-profiles/jupyterhub_singleuser_profiles/ui/package-lock.json
 #
-git+https://github.com/red-hat-data-services/jupyterhub-singleuser-profiles@4bff71e7b87e85629ec9e43964628b1e9f199472#egg=jupyterhub-singleuser-profiles
+git+https://github.com/red-hat-data-services/jupyterhub-singleuser-profiles@aaf2cf1c2aec09b16a562fb01f3f0928dc032af9#egg=jupyterhub-singleuser-profiles
 git+https://github.com/opendatahub-io/traefik-proxy@b468da04bf0057e9baeb458de6c3f9f677cfb79e#egg=jupyterhub-traefik-proxy
