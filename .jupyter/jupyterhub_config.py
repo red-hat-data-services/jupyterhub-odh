@@ -241,12 +241,14 @@ class OpenShiftSpawner(KubeSpawner):
 
     return url
 
-  def get_image(self):
-    image = self.single_user_profiles.user.get(self.user.name)['last_selected_image']
+def set_from_profile(self):
+    profile = self.single_user_profiles.user.get(self.user.name)
+    image = profile['last_selected_image']
     if custom_notebook_namespace:
-        return f'image-registry.openshift-image-registry.svc:5000/{namespace}/%s' % image
-    else:
-        return image
+        image = f'image-registry.openshift-image-registry.svc:5000/{namespace}/%s' % image
+
+    self.image = image
+    self.deployment_size = profile['last_selected_size']
     
 
 def apply_pod_profile(spawner, pod):
@@ -256,7 +258,7 @@ def apply_pod_profile(spawner, pod):
   return SingleuserProfiles.apply_pod_profile(spawner.user.name, pod, profile, gpu_types, DEFAULT_MOUNT_PATH, spawner.gpu_mode)
 
 def setup_environment(spawner):
-    spawner.image = spawner.get_image()
+    spawner.set_from_profile()
     spawner.single_user_profiles.load_profiles(username=spawner.user.name)
     spawner.single_user_profiles.setup_services(spawner, spawner.image, spawner.user.name)
 
