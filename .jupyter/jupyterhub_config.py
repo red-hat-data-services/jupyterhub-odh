@@ -241,7 +241,7 @@ class OpenShiftSpawner(KubeSpawner):
 
     return url
 
-def set_from_profile(self):
+  def set_from_profile(self):
     profile = self.single_user_profiles.user.get(self.user.name)
     image = profile['last_selected_image']
     if custom_notebook_namespace:
