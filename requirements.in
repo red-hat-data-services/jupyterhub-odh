@@ -1,6 +1,6 @@
 aiohttp
 escapism
-jupyterhub>=1.2,<2.0
+jupyterhub>=1.5,<2.0
 passlib
 toml
 kubernetes
