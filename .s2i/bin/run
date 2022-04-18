@@ -16,7 +16,7 @@ wait_service
 echo "Waiting to become leader..."
 
 until [ "${ME}" == "$(get_leader)" ]; do
-  sleep 6
+  sleep 3
 done
 
 echo "Assigned as new leader"
