@@ -1,6 +1,6 @@
 flake8
 setuptools==52.0.0
-wheel==0.36.2
+wheel==0.37.0
 flit
 toml
 setuptools-scm
