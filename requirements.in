@@ -14,7 +14,3 @@ pydantic==1.8.1
 typing-extensions==3.7.4.3
 jupyterhub-idle-culler==1.1
 prometheus-api-client==0.5.0
-numpy==1.21.5
-setuptools==59.2.0
-wheel==0.37.0
-cython==0.29.28
